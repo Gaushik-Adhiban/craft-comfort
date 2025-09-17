@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import heroMain from '@/assets/hero-main.jpg';
+import heroLivingRoom from '@/assets/hero-living-room.jpg';
+import heroBedroom from '@/assets/hero-bedroom.jpg';
+import heroDining from '@/assets/hero-dining.jpg';
 
 interface HeroSlide {
   id: number;
@@ -21,35 +24,35 @@ const heroSlides: HeroSlide[] = [
   {
     id: 1,
     title: "Transform Your Space",
-    subtitle: "Modern Furniture Collection",
-    description: "Discover our curated selection of contemporary furniture designed to elevate your living space with style and comfort.",
-    image: heroMain,
-    ctaText: "Shop Now",
+    subtitle: "Luxury Living Collection",
+    description: "Discover our curated selection of premium furniture designed to elevate your living space with unparalleled style and comfort.",
+    image: heroLivingRoom,
+    ctaText: "Explore Collection",
     ctaLink: "/category/living-room",
-    ctaSecondary: "Browse All",
-    ctaSecondaryLink: "/category/living-room"
+    ctaSecondary: "Shop Sofas",
+    ctaSecondaryLink: "/category/living-room/sofas"
   },
   {
     id: 2,
-    title: "Bedroom Essentials",
-    subtitle: "Sleep in Style",
-    description: "Create your perfect bedroom sanctuary with our premium beds, mattresses, and bedroom furniture collection.",
-    image: heroMain, // Will be replaced with bedroom image
+    title: "Sleep in Luxury",
+    subtitle: "Premium Bedroom Essentials",
+    description: "Create your perfect bedroom sanctuary with our exquisite collection of beds, mattresses, and elegant bedroom furniture.",
+    image: heroBedroom,
     ctaText: "Shop Bedroom",
     ctaLink: "/category/bedroom",
-    ctaSecondary: "View Collection",
-    ctaSecondaryLink: "/category/bedroom"
+    ctaSecondary: "View Beds",
+    ctaSecondaryLink: "/category/bedroom/beds"
   },
   {
     id: 3,
-    title: "Kitchen & Dining",
-    subtitle: "Gather in Style",
-    description: "Bring your family together with our beautiful dining sets and kitchen furniture designed for memorable moments.",
-    image: heroMain, // Will be replaced with kitchen image
-    ctaText: "Shop Kitchen",
+    title: "Gather in Elegance",
+    subtitle: "Sophisticated Dining",
+    description: "Bring your family together around beautifully crafted dining sets that create memorable moments and lasting impressions.",
+    image: heroDining,
+    ctaText: "Shop Dining",
     ctaLink: "/category/kitchen",
-    ctaSecondary: "Explore More",
-    ctaSecondaryLink: "/category/kitchen"
+    ctaSecondary: "View Tables",
+    ctaSecondaryLink: "/category/kitchen/dining-tables"
   }
 ];
 
@@ -83,22 +86,25 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-muted to-background">
+    <div className="relative h-[80vh] min-h-[600px] overflow-hidden bg-gradient-to-br from-muted to-background">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1 }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
-          <div 
+          {/* Background Image with Parallax Effect */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${heroSlides[currentSlide].image})`
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(${heroSlides[currentSlide].image})`
             }}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 8 }}
           />
 
           {/* Content */}
@@ -111,51 +117,61 @@ const HeroCarousel = () => {
                   transition={{ delay: 0.2, duration: 0.8 }}
                   className="space-y-6"
                 >
-                  <div className="space-y-2">
+                  <div className="space-y-4">
                     <motion.p 
-                      className="text-secondary font-semibold text-lg tracking-wide"
-                      initial={{ opacity: 0, x: -20 }}
+                      className="text-secondary font-semibold text-xl tracking-wide uppercase"
+                      initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3, duration: 0.6 }}
+                      transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
                     >
                       {heroSlides[currentSlide].subtitle}
                     </motion.p>
                     <motion.h1 
-                      className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.8 }}
+                      className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
+                      initial={{ opacity: 0, y: 30, rotateX: 90 }}
+                      animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                      transition={{ delay: 0.5, duration: 1, type: "spring", stiffness: 100 }}
                     >
                       {heroSlides[currentSlide].title}
                     </motion.h1>
                   </div>
 
                   <motion.p 
-                    className="text-xl text-gray-200 leading-relaxed max-w-lg"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="text-2xl text-gray-100 leading-relaxed max-w-2xl font-light"
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
+                    transition={{ delay: 0.7, duration: 0.8 }}
                   >
                     {heroSlides[currentSlide].description}
                   </motion.p>
 
                   <motion.div 
-                    className="flex flex-col sm:flex-row gap-4 pt-4"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="flex flex-col sm:flex-row gap-6 pt-8"
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
+                    transition={{ delay: 0.9, duration: 0.8 }}
                   >
-                    <Button asChild className="btn-hero">
-                      <Link to={heroSlides[currentSlide].ctaLink}>
-                        {heroSlides[currentSlide].ctaText}
-                      </Link>
-                    </Button>
-                    {heroSlides[currentSlide].ctaSecondary && (
-                      <Button asChild variant="outline" className="text-white border-white hover:bg-white hover:text-foreground">
-                        <Link to={heroSlides[currentSlide].ctaSecondaryLink!}>
-                          {heroSlides[currentSlide].ctaSecondary}
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button asChild className="btn-hero text-lg px-10 py-4">
+                        <Link to={heroSlides[currentSlide].ctaLink}>
+                          {heroSlides[currentSlide].ctaText}
                         </Link>
                       </Button>
+                    </motion.div>
+                    {heroSlides[currentSlide].ctaSecondary && (
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Button asChild variant="outline" className="text-lg px-10 py-4 text-white border-2 border-white/80 hover:bg-white hover:text-foreground backdrop-blur-sm">
+                          <Link to={heroSlides[currentSlide].ctaSecondaryLink!}>
+                            {heroSlides[currentSlide].ctaSecondary}
+                          </Link>
+                        </Button>
+                      </motion.div>
                     )}
                   </motion.div>
                 </motion.div>

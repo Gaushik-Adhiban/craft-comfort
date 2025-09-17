@@ -172,61 +172,132 @@
     animation: bounce-in 0.5s ease-out forwards;
   }
 
+  .animate-luxury-float {
+    animation: luxury-float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-parallax {
+    animation: parallax-drift 20s linear infinite;
+  }
+
   /* Product Card Hover Effects */
   .product-card {
-    @apply bg-card border border-border rounded-lg overflow-hidden transition-all duration-300;
-    @apply hover:shadow-lg hover:-translate-y-1 hover:border-primary/20;
+    @apply bg-gradient-card border border-border rounded-xl overflow-hidden transition-all duration-500;
+    @apply hover:shadow-2xl hover:-translate-y-2 hover:border-primary/30 hover:scale-[1.02];
+    transform-style: preserve-3d;
   }
 
   .product-image {
-    @apply transition-all duration-500 ease-in-out;
+    @apply transition-all duration-700 ease-in-out;
   }
 
   .product-image:hover {
-    @apply scale-105;
+    @apply scale-110;
   }
 
-  /* Button Variants */
+  /* Luxury Button Variants */
   .btn-hero {
-    @apply bg-gradient-to-r from-primary to-primary-hover text-primary-foreground;
-    @apply px-8 py-4 rounded-lg font-semibold text-lg shadow-lg;
-    @apply hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300;
+    @apply bg-gradient-primary text-primary-foreground relative overflow-hidden;
+    @apply px-10 py-4 rounded-xl font-bold text-lg shadow-2xl;
+    @apply hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0;
+    @apply before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700;
   }
 
   .btn-secondary-hero {
-    @apply bg-gradient-to-r from-secondary to-secondary-hover text-secondary-foreground;
-    @apply px-8 py-4 rounded-lg font-semibold text-lg shadow-lg;
-    @apply hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300;
+    @apply bg-gradient-secondary text-secondary-foreground relative overflow-hidden;
+    @apply px-10 py-4 rounded-xl font-bold text-lg shadow-2xl;
+    @apply hover:shadow-xl hover:-translate-y-1 hover:scale-105 transition-all duration-300;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0;
+    @apply before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700;
   }
 
-  /* Navigation Effects */
+  /* Enhanced Navigation Effects */
   .nav-link {
-    @apply relative transition-colors duration-200 hover:text-primary;
+    @apply relative transition-all duration-300 hover:text-primary;
   }
 
   .nav-link::after {
-    @apply content-[''] absolute left-0 -bottom-1 w-0 h-0.5 bg-primary transition-all duration-300;
+    @apply content-[''] absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-primary transition-all duration-500;
   }
 
   .nav-link:hover::after {
     @apply w-full;
   }
 
-  /* Card Effects */
+  /* Luxury Card Effects */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/90 backdrop-blur-xl border border-white/30 shadow-2xl;
+    @apply dark:bg-background/90 dark:border-white/10;
   }
 
-  /* Gradient Text */
+  .luxury-card {
+    @apply bg-gradient-card border border-border/50 rounded-2xl shadow-2xl;
+    @apply hover:shadow-3xl hover:border-primary/30 transition-all duration-500;
+    @apply relative overflow-hidden;
+  }
+
+  .luxury-card::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5;
+    @apply opacity-0 hover:opacity-100 transition-opacity duration-500;
+  }
+
+  /* Premium Text Effects */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold;
+    @apply bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent font-bold;
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  .luxury-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-foreground via-primary to-foreground;
+    background-size: 200% 100%;
+    animation: luxury-shimmer 4s ease-in-out infinite;
+  }
+
+  /* 3D Transform Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Premium Shadows */
+  .shadow-luxury {
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.1),
+      0 8px 40px rgba(0, 0, 0, 0.1),
+      0 16px 80px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-glow-primary {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+  }
+
+  .shadow-glow-secondary {
+    box-shadow: 0 0 30px hsl(var(--secondary) / 0.3);
+  }
+
+  /* Backdrop Effects */
+  .backdrop-luxury {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
   }
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -237,7 +308,7 @@
 @keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
@@ -248,14 +319,65 @@
 @keyframes bounce-in {
   0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.7) translateY(30px);
   }
   60% {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes luxury-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+    filter: drop-shadow(0 0 5px hsl(var(--primary) / 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px hsl(var(--primary) / 0.6));
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes luxury-shimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes parallax-drift {
+  0% {
+    transform: translateX(-100px) translateY(-50px);
+  }
+  50% {
+    transform: translateX(100px) translateY(50px);
+  }
+  100% {
+    transform: translateX(-100px) translateY(-50px);
   }
 }

@@ -70,6 +70,11 @@ export default {
         'md': 'var(--shadow-md)',
         'lg': 'var(--shadow-lg)',
         'xl': 'var(--shadow-xl)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        '3xl': '0 35px 60px -12px rgba(0, 0, 0, 0.3)',
+        'luxury': '0 4px 20px rgba(0, 0, 0, 0.1), 0 8px 40px rgba(0, 0, 0, 0.1)',
+        'glow-primary': '0 0 30px hsl(var(--primary) / 0.3)',
+        'glow-secondary': '0 0 30px hsl(var(--secondary) / 0.3)',
       },
       transitionProperty: {
         'fast': 'var(--transition-fast)',
@@ -99,10 +104,52 @@ export default {
             height: "0",
           },
         },
+        "luxury-float": {
+          "0%, 100%": {
+            transform: "translateY(0px) rotate(0deg)",
+          },
+          "33%": {
+            transform: "translateY(-10px) rotate(1deg)",
+          },
+          "66%": {
+            transform: "translateY(5px) rotate(-1deg)",
+          },
+        },
+        "glow": {
+          "0%": {
+            filter: "drop-shadow(0 0 5px hsl(var(--primary) / 0.3))",
+          },
+          "100%": {
+            filter: "drop-shadow(0 0 20px hsl(var(--primary) / 0.6))",
+          },
+        },
+        "gradient-shift": {
+          "0%, 100%": {
+            "background-position": "0% 50%",
+          },
+          "50%": {
+            "background-position": "100% 50%",
+          },
+        },
+        "parallax-drift": {
+          "0%": {
+            transform: "translateX(-100px) translateY(-50px)",
+          },
+          "50%": {
+            transform: "translateX(100px) translateY(50px)",
+          },
+          "100%": {
+            transform: "translateX(-100px) translateY(-50px)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "luxury-float": "luxury-float 6s ease-in-out infinite",
+        "glow": "glow 2s ease-in-out infinite alternate",
+        "gradient-shift": "gradient-shift 3s ease-in-out infinite",
+        "parallax-drift": "parallax-drift 20s linear infinite",
       },
     },
   },
